@@ -2,11 +2,11 @@
     "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
     "contentVersion": "1.0.0.0",
     "parameters": {
-        "locationEastUS": {
+        "locEastUS": {
             "type": "string",
             "defaultValue": "eastus"
         },
-        "locationEastUS2": {
+        "locEastUS2": {
             "type": "string",
             "defaultValue": "eastus2"
         },
@@ -19,13 +19,13 @@
         "availabilitySetName": {
             "type": "string"
         },
-        "vmName1": {
+        "vm1": {
             "type": "string"
         },
-        "vmName2": {
+        "vm2": {
             "type": "string"
         },
-        "vmNameBackend": {
+        "eastus2vm": {
             "type": "string"
         },
         "adminUsername": {
@@ -54,19 +54,19 @@
         {
             "type": "Microsoft.Resources/deployments",
             "apiVersion": "2021-04-01",
-            "name": "vnet-deployment",
+            "name": "vnet-deploy",
             "properties": {
                 "mode": "Incremental",
                 "templateLink": {
-                    "uri": "https://raw.githubusercontent.com/ualla3011/Azureproj/main/infra/network/vnets.json",
+                    "uri": "https://raw.githubusercontent.com/ualla3011/Azureproj/main/infra/network/vnet-peering.json",
                     "contentVersion": "1.0.0.0"
                 },
                 "parameters": {
-                    "locationEastUS": {
-                        "value": "[parameters('locationEastUS')]"
+                    "locEastUS": {
+                        "value": "[parameters('locEastUS')]"
                     },
-                    "locationEastUS2": {
-                        "value": "[parameters('locationEastUS2')]"
+                    "locEastUS2": {
+                        "value": "[parameters('locEastUS2')]"
                     }
                 }
             }
@@ -74,19 +74,19 @@
         {
             "type": "Microsoft.Resources/deployments",
             "apiVersion": "2021-04-01",
-            "name": "webvm-deployment",
+            "name": "eastusvm-deploy",
             "dependsOn": [
-                "vnet-deployment"
+                "vnet-deploy"
             ],
             "properties": {
                 "mode": "Incremental",
                 "templateLink": {
-                    "uri": "https://raw.githubusercontent.com/ualla3011/Azureproj/main/infra/compute/web-vm.json",
+                    "uri": "https://raw.githubusercontent.com/ualla3011/Azureproj/main/infra/compute/eastusvm.json",
                     "contentVersion": "1.0.0.0"
                 },
                 "parameters": {
-                    "locationEastUS": {
-                        "value": "[parameters('locationEastUS')]"
+                    "locEastUS": {
+                        "value": "[parameters('locEastUS')]"
                     },
                     "availabilitySetName": {
                         "value": "[parameters('availabilitySetName')]"
@@ -107,7 +107,7 @@
                         "value": "[parameters('vnetNameEastUS')]"
                     },
                     "subnetName": {
-                        "value": "web-subnet"
+                        "value": "eastus-subnet"
                     }
                 }
             }
@@ -115,22 +115,22 @@
         {
             "type": "Microsoft.Resources/deployments",
             "apiVersion": "2021-04-01",
-            "name": "backendvm-deployment",
+            "name": "eastus2vm-deploy",
             "dependsOn": [
-                "vnet-deployment"
+                "vnet-deploy"
             ],
             "properties": {
                 "mode": "Incremental",
                 "templateLink": {
-                    "uri": "https://raw.githubusercontent.com/ualla3011/Azureproj/main/infra/compute/vm-backend.json",
+                    "uri": "https://raw.githubusercontent.com/ualla3011/Azureproj/main/infra/compute/eastus2vm.json",
                     "contentVersion": "1.0.0.0"
                 },
                 "parameters": {
-                    "locationEastUS2": {
-                        "value": "[parameters('locationEastUS2')]"
+                    "locEastUS2": {
+                        "value": "[parameters('locEastUS2')]"
                     },
-                    "vmNameBackend": {
-                        "value": "[parameters('vmNameBackend')]"
+                    "eastus2vm": {
+                        "value": "[parameters('eastus2vm')]"
                     },
                     "adminUsername": {
                         "value": "[parameters('adminUsername')]"
@@ -149,7 +149,7 @@
             "apiVersion": "2021-04-01",
             "name": "firewall-deployment",
             "dependsOn": [
-                "backendvm-deployment"
+                "eastus2vm-deploy"
             ],
             "properties": {
                 "mode": "Incremental",
@@ -158,8 +158,8 @@
                     "contentVersion": "1.0.0.0"
                 },
                 "parameters": {
-                    "locationEastUS2": {
-                        "value": "[parameters('locationEastUS2')]"
+                    "locEastUS2": {
+                        "value": "[parameters('locaEastUS2')]"
                     },
                     "firewallName": {
                         "value": "[parameters('firewallName')]"
