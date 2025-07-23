@@ -2,10 +2,10 @@
   "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentParameters.json#",
   "contentVersion": "1.0.0.0",
   "parameters": {
-    "locEastUS": {
+    "locationEastUS": {
       "value": "eastus"
     },
-    "locaEastUS2": {
+    "locationEastUS2": {
       "value": "eastus2"
     },
     "vnetNameEastUS": {
@@ -15,22 +15,22 @@
       "value": "EastUS2-VNet"
     },
     "availabilitySetName": {
-      "value": "eastusAS"
+      "value": "WebAS"
     },
-    "vm1": {
+    "vmName1": {
       "value": "w1"
     },
-    "vm2": {
+    "vmName2": {
       "value": "w2"
     },
-    "eastus2vm": {
-      "value": "ws11"
+    "vmNameBackend": {
+      "value": "WS11"
     },
     "adminUsername": {
       "value": "azureuser"
     },
     "adminPassword": {
-      "value": "Welcome1234"
+      "value": "Password123!"
     },
     "firewallName": {
       "value": "myAzureFirewall"
@@ -42,7 +42,7 @@
       "value": "firewallPublicIP"
     },
     "nicPrefix": {
-      "value": "eastus-nic"
+      "value": "webnic"
     },
     "vmPrefix": {
       "value": "w"
