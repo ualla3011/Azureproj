@@ -2,18 +2,18 @@
     "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
     "contentVersion": "1.0.0.0",
     "parameters": {
-        "locationEastUS": {
+        "locEastUS": {
             "type": "string",
             "defaultValue": "eastus"
         },
-        "locationEastUS2": {
+        "locEastUS2": {
             "type": "string",
             "defaultValue": "eastus2"
         },
-        "vnetNameEastUS": {
+        "vnetEastUS": {
             "type": "string"
         },
-        "vnetNameEastUS2": {
+        "vnetEastUS2": {
             "type": "string"
         },
         "availabilitySetName": {
@@ -25,7 +25,7 @@
         "vmName2": {
             "type": "string"
         },
-        "vmNameBackend": {
+        "vmName3": {
             "type": "string"
         },
         "adminUsername": {
@@ -62,11 +62,11 @@
                     "contentVersion": "1.0.0.0"
                 },
                 "parameters": {
-                    "locationEastUS": {
-                        "value": "[parameters('locationEastUS')]"
+                    "locEastUS": {
+                        "value": "[parameters('locEastUS')]"
                     },
-                    "locationEastUS2": {
-                        "value": "[parameters('locationEastUS2')]"
+                    "locEastUS2": {
+                        "value": "[parameters('locEastUS2')]"
                     }
                 }
             }
@@ -85,8 +85,8 @@
                     "contentVersion": "1.0.0.0"
                 },
                 "parameters": {
-                    "locationEastUS": {
-                        "value": "[parameters('locationEastUS')]"
+                    "locEastUS": {
+                        "value": "[parameters('locEastUS')]"
                     },
                     "availabilitySetName": {
                         "value": "[parameters('availabilitySetName')]"
@@ -103,8 +103,8 @@
                     "adminPassword": {
                         "value": "[parameters('adminPassword')]"
                     },
-                    "vnetNameEastUS": {
-                        "value": "[parameters('vnetNameEastUS')]"
+                    "vnetEastUS": {
+                        "value": "[parameters('vnetEastUS')]"
                     },
                     "subnetName": {
                         "value": "web-subnet"
@@ -126,11 +126,11 @@
                     "contentVersion": "1.0.0.0"
                 },
                 "parameters": {
-                    "locationEastUS2": {
-                        "value": "[parameters('locationEastUS2')]"
+                    "locEastUS2": {
+                        "value": "[parameters('locEastUS2')]"
                     },
-                    "vmNameBackend": {
-                        "value": "[parameters('vmNameBackend')]"
+                    "vmName3": {
+                        "value": "[parameters('vmName3')]"
                     },
                     "adminUsername": {
                         "value": "[parameters('adminUsername')]"
@@ -138,8 +138,8 @@
                     "adminPassword": {
                         "value": "[parameters('adminPassword')]"
                     },
-                    "vnetNameEastUS2": {
-                        "value": "[parameters('vnetNameEastUS2')]"
+                    "vnetEastUS2": {
+                        "value": "[parameters('vnetEastUS2')]"
                     }
                 }
             }
@@ -158,8 +158,8 @@
                     "contentVersion": "1.0.0.0"
                 },
                 "parameters": {
-                    "locationEastUS2": {
-                        "value": "[parameters('locationEastUS2')]"
+                    "locEastUS2": {
+                        "value": "[parameters('locEastUS2')]"
                     },
                     "firewallName": {
                         "value": "[parameters('firewallName')]"
@@ -171,7 +171,7 @@
                         "value": "[parameters('publicIpName')]"
                     },
                     "vnetName": {
-                        "value": "[parameters('vnetNameEastUS2')]"
+                        "value": "[parameters('vnetEastUS2')]"
                     }
                 }
             }
