@@ -2,11 +2,11 @@
     "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
     "contentVersion": "1.0.0.0",
     "parameters": {
-        "locEastUS": {
+        "locationEastUS": {
             "type": "string",
             "defaultValue": "eastus"
         },
-        "locEastUS2": {
+        "locationEastUS2": {
             "type": "string",
             "defaultValue": "eastus2"
         },
@@ -62,11 +62,11 @@
                     "contentVersion": "1.0.0.0"
                 },
                 "parameters": {
-                    "locEastUS": {
-                        "value": "[parameters('locEastUS')]"
+                    "locationEastUS": {
+                        "value": "[parameters('locationEastUS')]"
                     },
-                    "locEastUS2": {
-                        "value": "[parameters('locEastUS2')]"
+                    "locationEastUS2": {
+                        "value": "[parameters('locationEastUS2')]"
                     }
                 }
             }
@@ -85,8 +85,8 @@
                     "contentVersion": "1.0.0.0"
                 },
                 "parameters": {
-                    "locEastUS": {
-                        "value": "[parameters('locEastUS')]"
+                    "locationEastUS": {
+                        "value": "[parameters('locationEastUS')]"
                     },
                     "availabilitySetName": {
                         "value": "[parameters('availabilitySetName')]"
@@ -126,8 +126,8 @@
                     "contentVersion": "1.0.0.0"
                 },
                 "parameters": {
-                    "locEastUS2": {
-                        "value": "[parameters('locEastUS2')]"
+                    "locationEastUS2": {
+                        "value": "[parameters('locationEastUS2')]"
                     },
                     "vmName3": {
                         "value": "[parameters('vmName3')]"
@@ -158,8 +158,8 @@
                     "contentVersion": "1.0.0.0"
                 },
                 "parameters": {
-                    "locEastUS2": {
-                        "value": "[parameters('locEastUS2')]"
+                    "locationEastUS2": {
+                        "value": "[parameters('locationEastUS2')]"
                     },
                     "firewallName": {
                         "value": "[parameters('firewallName')]"
