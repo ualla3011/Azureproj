@@ -58,7 +58,7 @@
             "properties": {
                 "mode": "Incremental",
                 "templateLink": {
-                    "uri": "https://raw.githubusercontent.com/ualla3011/Azureproj/refs/heads/main/infra/compute/vnet-peering.json",
+                    "uri": "https://raw.githubusercontent.com/ualla3011/Azureproj/refs/heads/main/infra/network/vnet_peering.json",
                     "contentVersion": "1.0.0.0"
                 },
                 "parameters": {
@@ -154,7 +154,7 @@
             "properties": {
                 "mode": "Incremental",
                 "templateLink": {
-                    "uri": "https://raw.githubusercontent.com/ualla3011/Azureproj/refs/heads/main/infra/compute/firewall.json",
+                    "uri": "https://raw.githubusercontent.com/ualla3011/Azureproj/refs/heads/main/infra/network/firewall.json",
                     "contentVersion": "1.0.0.0"
                 },
                 "parameters": {
