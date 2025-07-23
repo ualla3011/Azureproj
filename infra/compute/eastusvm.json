@@ -2,7 +2,7 @@
     "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
     "contentVersion": "1.0.0.0",
     "parameters": {
-        "locationEastUS": {
+        "locEastUS": {
             "type": "string",
             "defaultValue": "eastus"
         },
@@ -21,7 +21,7 @@
         "adminPassword": {
             "type": "securestring"
         },
-        "vnetNameEastUS": {
+        "vnetEastUS": {
             "type": "string"
         },
         "subnetName": {
@@ -40,19 +40,19 @@
             "type": "Microsoft.Network/publicIPAddresses",
             "apiVersion": "2023-04-01",
             "name": "web-lb-pip",
-            "location": "[parameters('locationEastUS')]",
+            "loc": "[parameters('locEastUS')]",
             "sku": {
                 "name": "Standard"
             },
             "properties": {
-                "publicIPAllocationMethod": "Static"
+                "publicIPAllocMethod": "Static"
             }
         },
         {
             "type": "Microsoft.Compute/availabilitySets",
             "apiVersion": "2023-03-01",
             "name": "[parameters('availabilitySetName')]",
-            "location": "[parameters('locationEastUS')]",
+            "loc": "[parameters('locEastUS')]",
             "properties": {
                 "platformFaultDomainCount": 2,
                 "platformUpdateDomainCount": 2
@@ -65,7 +65,7 @@
             "type": "Microsoft.Network/loadBalancers",
             "apiVersion": "2023-04-01",
             "name": "[variables('lbName')]",
-            "location": "[parameters('locationEastUS')]",
+            "loc": "[parameters('locEastUS')]",
             "dependsOn": [
                 "web-lb-pip"
             ],
@@ -124,7 +124,7 @@
             "type": "Microsoft.Network/networkInterfaces",
             "apiVersion": "2023-04-01",
             "name": "[concat(parameters('nicPrefix'), copyIndex())]",
-            "location": "[parameters('locationEastUS')]",
+            "loc": "[parameters('locEastUS')]",
             "copy": {
                 "name": "nicCopy",
                 "count": 2
@@ -138,14 +138,14 @@
                         "name": "ipconfig1",
                         "properties": {
                             "subnet": {
-                                "id": "[resourceId('Microsoft.Network/virtualNetworks/subnets', parameters('vnetNameEastUS'), parameters('subnetName'))]"
+                                "id": "[resourceId('Microsoft.Network/virtualNetworks/subnets', parameters('vnetEastUS'), parameters('subnetName'))]"
                             },
                             "loadBalancerBackendAddressPools": [
                                 {
                                     "id": "[resourceId('Microsoft.Network/loadBalancers/backendAddressPools', variables('lbName'), variables('backendPool'))]"
                                 }
                             ],
-                            "privateIPAllocationMethod": "Dynamic"
+                            "privateIPAllocMethod": "Dynamic"
                         }
                     }
                 ]
@@ -155,7 +155,7 @@
             "type": "Microsoft.Compute/virtualMachines",
             "apiVersion": "2023-03-01",
             "name": "[concat(parameters('vmPrefix'), string(add(copyIndex(), 1)))]",
-            "location": "[parameters('locationEastUS')]",
+            "loc": "[parameters('locEastUS')]",
             "copy": {
                 "name": "vmCopy",
                 "count": 2
