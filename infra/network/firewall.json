@@ -2,7 +2,7 @@
   "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
   "contentVersion": "1.0.0.0",
   "parameters": {
-    "locationEastUS2": {
+    "locEastUS2": {
       "type": "string"
     },
     "firewallName": {
@@ -31,12 +31,12 @@
       "type": "Microsoft.Network/publicIPAddresses",
       "apiVersion": "2023-04-01",
       "name": "[parameters('publicIpName')]",
-      "location": "[parameters('locationEastUS2')]",
+      "loc": "[parameters('locEastUS2')]",
       "sku": {
         "name": "Standard"
       },
       "properties": {
-        "publicIPAllocationMethod": "Static",
+        "publicIPAllocMethod": "Static",
         "idleTimeoutInMinutes": 4
       }
     },
@@ -44,7 +44,7 @@
       "type": "Microsoft.Network/azureFirewalls",
       "apiVersion": "2023-04-01",
       "name": "[parameters('firewallName')]",
-      "location": "[parameters('locationEastUS2')]",
+      "loc": "[parameters('locEastUS2')]",
       "dependsOn": [
         "[resourceId('Microsoft.Network/publicIPAddresses', parameters('publicIpName'))]"
       ],
