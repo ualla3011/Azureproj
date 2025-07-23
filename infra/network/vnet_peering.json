@@ -2,16 +2,16 @@
   "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
   "contentVersion": "1.0.0.0",
   "parameters": {
-    "locEastUS": {
+    "locationEastUS": {
       "type": "string"
     },
-    "locEastUS2": {
+    "locationEastUS2": {
       "type": "string"
     }
   },
   "variables": {
-    "eastVNetName": "EastUSVNet",
-    "east2VNetName": "EastUS2VNet",
+    "eastVNetName": "EastUS-VNet",
+    "east2VNetName": "EastUS2-VNet",
     "eastVNetAddress": "10.0.0.0/16",
     "east2VNetAddress": "10.1.0.0/16"
   },
@@ -20,7 +20,7 @@
       "type": "Microsoft.Network/virtualNetworks",
       "apiVersion": "2023-04-01",
       "name": "[variables('eastVNetName')]",
-      "loc": "[parameters('locEastUS')]",
+      "location": "[parameters('locationEastUS')]",
       "properties": {
         "addressSpace": {
           "addressPrefixes": [
@@ -47,7 +47,7 @@
       "type": "Microsoft.Network/virtualNetworks",
       "apiVersion": "2023-04-01",
       "name": "[variables('east2VNetName')]",
-      "loc": "[parameters('locEastUS2')]",
+      "location": "[parameters('locationEastUS2')]",
       "properties": {
         "addressSpace": {
           "addressPrefixes": [
