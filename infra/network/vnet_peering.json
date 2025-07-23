@@ -10,8 +10,8 @@
     }
   },
   "variables": {
-    "eastVNetName": "EastUS-VNet",
-    "east2VNetName": "EastUS2-VNet",
+    "eastVNetName": "EastUSVNet",
+    "east2VNetName": "EastUS2VNet",
     "eastVNetAddress": "10.0.0.0/16",
     "east2VNetAddress": "10.1.0.0/16"
   },
