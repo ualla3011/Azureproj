@@ -2,7 +2,7 @@
     "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
     "contentVersion": "1.0.0.0",
     "parameters": {
-        "locationEastUS2": {
+        "locEastUS2": {
             "type": "string",
             "defaultValue": "eastus2"
         },
@@ -12,7 +12,7 @@
         "adminPassword": {
             "type": "securestring"
         },
-        "vmNameBackend": {
+        "eastus2vm": {
             "type": "string"
         },
         "vnetNameEastUS2": {
@@ -20,18 +20,18 @@
         },
         "subnetName": {
             "type": "string",
-            "defaultValue": "ws-subnet"
+            "defaultValue": "eastus2-subnet"
         }
     },
     "variables": {
-        "nicName": "[concat(parameters('vmNameBackend'), '-nic')]"
+        "nicName": "[concat(parameters('eastus2vm'), '-nic')]"
     },
     "resources": [
         {
             "type": "Microsoft.Network/networkInterfaces",
             "apiVersion": "2023-04-01",
             "name": "[variables('nicName')]",
-            "location": "[parameters('locationEastUS2')]",
+            "loc": "[parameters('locEastUS2')]",
             "properties": {
                 "ipConfigurations": [
                     {
@@ -40,7 +40,7 @@
                             "subnet": {
                                 "id": "[resourceId('Microsoft.Network/virtualNetworks/subnets', parameters('vnetNameEastUS2'), parameters('subnetName'))]"
                             },
-                            "privateIPAllocationMethod": "Dynamic"
+                            "privateIPAllocMethod": "Dynamic"
                         }
                     }
                 ]
@@ -49,8 +49,8 @@
         {
             "type": "Microsoft.Compute/virtualMachines",
             "apiVersion": "2023-03-01",
-            "name": "[parameters('vmNameBackend')]",
-            "location": "[parameters('locationEastUS2')]",
+            "name": "[parameters('eastus2vm')]",
+            "loc": "[parameters('locEastUS2')]",
             "dependsOn": [
                 "[resourceId('Microsoft.Network/networkInterfaces', variables('nicName'))]"
             ],
@@ -59,7 +59,7 @@
                     "vmSize": "Standard_B1ms"
                 },
                 "osProfile": {
-                    "computerName": "[parameters('vmNameBackend')]",
+                    "computerName": "[parameters('eastus2vm')]",
                     "adminUsername": "[parameters('adminUsername')]",
                     "adminPassword": "[parameters('adminPassword')]"
                 },
