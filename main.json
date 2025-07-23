@@ -2,11 +2,11 @@
     "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
     "contentVersion": "1.0.0.0",
     "parameters": {
-        "locEastUS": {
+        "locationEastUS": {
             "type": "string",
             "defaultValue": "eastus"
         },
-        "locEastUS2": {
+        "locationEastUS2": {
             "type": "string",
             "defaultValue": "eastus2"
         },
@@ -19,13 +19,13 @@
         "availabilitySetName": {
             "type": "string"
         },
-        "vm1": {
+        "vmName1": {
             "type": "string"
         },
-        "vm2": {
+        "vmName2": {
             "type": "string"
         },
-        "eastus2vm": {
+        "vmNameBackend": {
             "type": "string"
         },
         "adminUsername": {
@@ -54,19 +54,19 @@
         {
             "type": "Microsoft.Resources/deployments",
             "apiVersion": "2021-04-01",
-            "name": "vnet-deploy",
+            "name": "vnet-deployment",
             "properties": {
                 "mode": "Incremental",
                 "templateLink": {
-                    "uri": "https://raw.githubusercontent.com/ualla3011/Azureproj/main/infra/network/vnet-peering.json",
+                    "uri": "https://raw.githubusercontent.com/Sindhura-krl/Course_project/main/infra/network/vnets.json",
                     "contentVersion": "1.0.0.0"
                 },
                 "parameters": {
-                    "locEastUS": {
-                        "value": "[parameters('locEastUS')]"
+                    "locationEastUS": {
+                        "value": "[parameters('locationEastUS')]"
                     },
-                    "locEastUS2": {
-                        "value": "[parameters('locEastUS2')]"
+                    "locationEastUS2": {
+                        "value": "[parameters('locationEastUS2')]"
                     }
                 }
             }
@@ -74,19 +74,19 @@
         {
             "type": "Microsoft.Resources/deployments",
             "apiVersion": "2021-04-01",
-            "name": "eastusvm-deploy",
+            "name": "webvm-deployment",
             "dependsOn": [
-                "vnet-deploy"
+                "vnet-deployment"
             ],
             "properties": {
                 "mode": "Incremental",
                 "templateLink": {
-                    "uri": "https://raw.githubusercontent.com/ualla3011/Azureproj/main/infra/compute/eastusvm.json",
+                    "uri": "https://raw.githubusercontent.com/Sindhura-krl/Course_project/main/infra/compute/web-vm.json",
                     "contentVersion": "1.0.0.0"
                 },
                 "parameters": {
-                    "locEastUS": {
-                        "value": "[parameters('locEastUS')]"
+                    "locationEastUS": {
+                        "value": "[parameters('locationEastUS')]"
                     },
                     "availabilitySetName": {
                         "value": "[parameters('availabilitySetName')]"
@@ -107,7 +107,7 @@
                         "value": "[parameters('vnetNameEastUS')]"
                     },
                     "subnetName": {
-                        "value": "eastus-subnet"
+                        "value": "web-subnet"
                     }
                 }
             }
@@ -115,22 +115,22 @@
         {
             "type": "Microsoft.Resources/deployments",
             "apiVersion": "2021-04-01",
-            "name": "eastus2vm-deploy",
+            "name": "backendvm-deployment",
             "dependsOn": [
-                "vnet-deploy"
+                "vnet-deployment"
             ],
             "properties": {
                 "mode": "Incremental",
                 "templateLink": {
-                    "uri": "https://raw.githubusercontent.com/ualla3011/Azureproj/main/infra/compute/eastus2vm.json",
+                    "uri": "https://raw.githubusercontent.com/Sindhura-krl/Course_project/main/infra/compute/vm-backend.json",
                     "contentVersion": "1.0.0.0"
                 },
                 "parameters": {
-                    "locEastUS2": {
-                        "value": "[parameters('locEastUS2')]"
+                    "locationEastUS2": {
+                        "value": "[parameters('locationEastUS2')]"
                     },
-                    "eastus2vm": {
-                        "value": "[parameters('eastus2vm')]"
+                    "vmNameBackend": {
+                        "value": "[parameters('vmNameBackend')]"
                     },
                     "adminUsername": {
                         "value": "[parameters('adminUsername')]"
@@ -149,17 +149,17 @@
             "apiVersion": "2021-04-01",
             "name": "firewall-deployment",
             "dependsOn": [
-                "eastus2vm-deploy"
+                "backendvm-deployment"
             ],
             "properties": {
                 "mode": "Incremental",
                 "templateLink": {
-                    "uri": "https://raw.githubusercontent.com/ualla3011/Azureproj/main/infra/network/firewall.json",
+                    "uri": "https://raw.githubusercontent.com/Sindhura-krl/Course_project/main/infra/network/firewall.json",
                     "contentVersion": "1.0.0.0"
                 },
                 "parameters": {
-                    "locEastUS2": {
-                        "value": "[parameters('locaEastUS2')]"
+                    "locationEastUS2": {
+                        "value": "[parameters('locationEastUS2')]"
                     },
                     "firewallName": {
                         "value": "[parameters('firewallName')]"
