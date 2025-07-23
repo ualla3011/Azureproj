@@ -56,7 +56,7 @@
         },
         "subnets": [
           {
-            "name": "ws-subnet",
+            "name": "eastus2-subnet",
             "properties": {
               "addressPrefix": "10.1.1.0/24"
             }
