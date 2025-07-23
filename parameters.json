@@ -2,16 +2,16 @@
   "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentParameters.json#",
   "contentVersion": "1.0.0.0",
   "parameters": {
-    "locationEastUS": {
+    "locEastUS": {
       "value": "eastus"
     },
-    "locationEastUS2": {
+    "locEastUS2": {
       "value": "eastus2"
     },
-    "vnetNameEastUS": {
+    "vnetEastUS": {
       "value": "EastUS-VNet"
     },
-    "vnetNameEastUS2": {
+    "vnetEastUS2": {
       "value": "EastUS2-VNet"
     },
     "availabilitySetName": {
@@ -23,7 +23,7 @@
     "vmName2": {
       "value": "w2"
     },
-    "vmNameBackend": {
+    "vmName3": {
       "value": "WS11"
     },
     "adminUsername": {
